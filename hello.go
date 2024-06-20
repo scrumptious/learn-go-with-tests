@@ -4,6 +4,7 @@ import "fmt"
 
 const englishGreeting = "Hello, "
 const spanishGreeting = "Hola, "
+const frenchGreeting = "Bonjour, "
 
 type Greeting struct {
 	name     string
@@ -17,12 +18,22 @@ func Hello(g Greeting) string {
 	if g.language == "" {
 		g.language = "English"
 	}
+	return greetingPrefix(g.language) + g.name
+}
 
-	switch g.language {
+func greetingPrefix(language string) (prefix string) {
+	switch language {
 	case "Spanish":
-		return spanishGreeting + g.name
+		prefix = spanishGreeting
+		break
+	case "French":
+		prefix = frenchGreeting
+		break
+	default:
+		prefix = englishGreeting
 	}
-	return englishGreeting + g.name
+
+	return
 }
 
 func main() {
